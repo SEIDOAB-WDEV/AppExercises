@@ -18,13 +18,8 @@ namespace AppStudies.Pages
     public class ModelListModel : PageModel
     {
         //Just like for WebApi
-        IQuoteService _service = null;
-        IMixedListService _service1 = null;
-
+        IMixedListService _service = null;
         ILogger<ModelListModel> _logger = null;
-
-        //public member becomes part of the Model in the Razor page
-        public List<csFamousQuote> Quotes { get; set; } = new List<csFamousQuote>();
 
 
         //Will execute on a Get request
@@ -32,18 +27,14 @@ namespace AppStudies.Pages
         {
             //Just to show how to get current uri
             var uri = Request.Path;
-
-            //Use the Service
-            Quotes = _service.ReadQuotes();
             return Page();
         }
 
         //Inject services just like in WebApi
-        public ModelListModel(IQuoteService service, IMixedListService service1, ILogger<ModelListModel> logger)
+        public ModelListModel(IMixedListService service, ILogger<ModelListModel> logger)
         {
             _logger = logger;
             _service = service;
-            _service1 = service1;
         }
     }
 }

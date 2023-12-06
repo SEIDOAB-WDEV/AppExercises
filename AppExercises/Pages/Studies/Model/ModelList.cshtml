@@ -7,21 +7,8 @@
 @attribute [IgnoreAntiforgeryToken]
 <!-- Page list-of-quotes -->
 <div class="container px-4 py-4" id="list-of-quotes">
-    <h2 class="pb-2 border-bottom">List of famous quotes</h2>
+    <h2 class="pb-2 border-bottom">List Exercise</h2>
 
-    <p>Below are some famous quotes about love, work and the fact that tomorrow is another day. Select one that your friend likes.</p>
-    @foreach (var item in Model.Quotes)
-    {
-        <div class="row mb-2 text-center">
-            <div class="col-md-10 themed-grid-col">
-                @item.Quote
-                <div class="col-md-16  text-end">@item.Author</div>
-            </div>
-            <div class="col-md-2 themed-grid-col">
-                <a href="~/Studies/Model/ModelView?id=@item.QuoteId" class="btn btn-success btn-sm" type="button">View</a>
-            </div>
-        </div>
-    }
 
     <!-- inital template that can be easily hidden -->
     <div class="d-none">

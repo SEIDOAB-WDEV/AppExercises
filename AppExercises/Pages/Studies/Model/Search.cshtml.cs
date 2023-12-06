@@ -17,11 +17,10 @@ namespace AppStudies.Pages
     public class SearchModel : PageModel
     {
         //Just like for WebApi
-        IQuoteService _service = null;
+        IMixedListService _service = null;
         ILogger<SearchModel> _logger = null;
 
         //public member becomes part of the Model in the Razor page
-        public List<csFamousQuote> Quotes { get; set; } = new List<csFamousQuote>();
 
         //Pagination
         public int NrOfPages { get; set; }
@@ -52,7 +51,6 @@ namespace AppStudies.Pages
             UpdatePagination();
 
             //Use the Service
-            Quotes = _service.ReadQuotes(ThisPageNr, PageSize, SearchFilter);
 
             return Page();
         }
@@ -60,7 +58,7 @@ namespace AppStudies.Pages
         private void UpdatePagination()
         {
             //Pagination
-            NrOfPages = (int)Math.Ceiling((double)_service.NrOfQuotes(SearchFilter) / PageSize);
+            //NrOfPages = (int)Math.Ceiling((double)_service.NrOfQuotes(SearchFilter) / PageSize);
             PrevPageNr = Math.Max(0, ThisPageNr - 1);
             NextPageNr = Math.Min(NrOfPages - 1, ThisPageNr + 1);
             PresentPages = Math.Min(3, NrOfPages);
@@ -71,15 +69,13 @@ namespace AppStudies.Pages
             //Pagination
             UpdatePagination();
 
-            //Use the Service
-            Quotes = _service.ReadQuotes(ThisPageNr, PageSize, SearchFilter);
 
             //Page is rendered as the postback is part of the form tag
             return Page();
         }
 
         //Inject services just like in WebApi
-        public SearchModel(IQuoteService service, ILogger<SearchModel> logger)
+        public SearchModel(IMixedListService service, ILogger<SearchModel> logger)
         {
             _logger = logger;
             _service = service;

@@ -17,11 +17,10 @@ namespace AppStudies.Pages
     public class PaginationModel : PageModel
     {
         //Just like for WebApi
-        IQuoteService _service = null;
+        IMixedListService _service = null;
         ILogger<PaginationModel> _logger = null;
 
         //public member becomes part of the Model in the Razor page
-        public List<csFamousQuote> Quotes { get; set; } = new List<csFamousQuote>();
 
         //Pagination
         public int NrOfPages { get; set; }
@@ -43,20 +42,12 @@ namespace AppStudies.Pages
                 ThisPageNr = _pagenr;
             }
 
-            //Pagination
-            NrOfPages = (int) Math.Ceiling((double)_service.NrOfQuotes() / PageSize);
-            PrevPageNr = Math.Max(0, ThisPageNr - 1);
-            NextPageNr = Math.Min(NrOfPages-1, ThisPageNr + 1);
-            PresentPages = Math.Min(3, NrOfPages);
-
-            //Use the Service
-            Quotes = _service.ReadQuotes(ThisPageNr, PageSize);
 
             return Page();
         }
 
         //Inject services just like in WebApi
-        public PaginationModel(IQuoteService service, ILogger<PaginationModel> logger)
+        public PaginationModel(IMixedListService service, ILogger<PaginationModel> logger)
         {
             _logger = logger;
             _service = service;

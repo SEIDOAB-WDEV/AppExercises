@@ -17,33 +17,15 @@ namespace AppStudies.Pages
     public class ModelViewModel : PageModel
     {
         //Just like for WebApi
-        IQuoteService _service = null;
+        IMixedListService _service = null;
         ILogger<ModelViewModel> _logger = null;
 
         //public member becomes part of the Model in the Razor page
-        public csFamousQuote Quote { get; set; }
-        public string ErrorMessage { get; set; } = null;
 
-        //Will execute on a Get request
-        public IActionResult OnGet()
-        {
-            try
-            {
-                //Read a QueryParameter
-                Guid _id = Guid.Parse(Request.Query["id"]);
-
-                //Use the Service
-                Quote = _service.ReadQuote(_id);
-            }
-            catch (Exception e)
-            {
-                ErrorMessage = e.Message;
-            }
-            return Page();
-        }
+        //Method that will execute on a Get request
 
         //Inject services just like in WebApi
-        public ModelViewModel(IQuoteService service, ILogger<ModelViewModel> logger)
+        public ModelViewModel(IMixedListService service, ILogger<ModelViewModel> logger)
         {
             _logger = logger;
             _service = service;
