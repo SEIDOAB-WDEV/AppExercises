@@ -45,8 +45,10 @@
                                 Edit
                             </button>
 
-                            <!-- Button trigger post DeleteArtist -->
-                            <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm m-1"
+                            <!-- Button to trigger modal confirmation with modal in the form tag -->
+                            <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                    data-seido-modal-title="Confirm Delete" data-seido-modal-body="Do you want to delete a quote by @Model.QuotesIM[k].Author"
+                                    data-seido-modal-cancel="Cancel" data-seido-modal-Ok="Delete"
                                     data-seido-selected-item-id="@Model.QuotesIM[k].QuoteId">
                                 Del
                             </button>
@@ -68,6 +70,25 @@
                             <button type="submit" asp-page-handler="Edit" class="btn btn-success btn-sm m-1">
                                 Ok
                             </button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Delete -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="softModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="softModalLabel">Confirm deletion</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Hello from modal
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" asp-page-handler="Delete" class="btn btn-primary btn-danger">Ok</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }

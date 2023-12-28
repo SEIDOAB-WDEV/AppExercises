@@ -1,0 +1,72 @@
+﻿@page
+@model AppExercises.Pages.Studies.FormEdit.AddressListValidationModel
+@{
+    ViewData["Title"] = "Study AddressList";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
+
+    <!-- Page list-of-addresses -->
+    <div class="container px-4 py-4" id="list-of-quotes">
+        <form class="needs-validation" method="post" novalidate>
+            <!-- This is the parameter that will be sent to Post when item is clicked -->
+            <input type="hidden" name="addressId" data-seido-selected-item-id-target />
+
+            <h2 class="pb-2 border-bottom">
+                Edit the list of addresses
+                <button class="btn btn-primary-outline" type="submit" asp-page-handler="Save">
+                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#save" /></svg>
+                </button>
+                <button class="btn btn-primary-outline" type="submit" asp-page-handler="Undo">
+                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#undo" /></svg>
+                </button>
+            </h2>
+            @for (int k = 0; k < Model.AddressesIM.Count; k++)
+            {
+                <div class="row mb-2 text-center">
+                    <!-- Hidden fields so they are preserved by the Modelbinder -->
+                    <input asp-for="AddressesIM[k].StatusIM" value="@Model.AddressesIM[k].StatusIM" class="form-control" type="hidden" />
+                    <input asp-for="AddressesIM[k].AddressId" value="@Model.AddressesIM[k].AddressId" class="form-control" type="hidden" />
+                    <input asp-for="AddressesIM[k].StreetAddress" value="@Model.AddressesIM[k].StreetAddress" class="form-control" type="hidden" />
+                    <input asp-for="AddressesIM[k].ZipCode" value="@Model.AddressesIM[k].ZipCode" class="form-control" type="hidden" />
+                    <input asp-for="AddressesIM[k].City" value="@Model.AddressesIM[k].City" class="form-control" type="hidden" />
+                    <input asp-for="AddressesIM[k].Country" value="@Model.AddressesIM[k].Country" class="form-control" type="hidden" />
+
+                    <div class="col-md-4 themed-grid-col">@Model.AddressesIM[k].StreetAddress</div>
+                    <div class="col-md-2  themed-grid-col">@Model.AddressesIM[k].ZipCode</div>
+                    <div class="col-md-2  themed-grid-col">@Model.AddressesIM[k].City</div>
+                    <div class="col-md-2  themed-grid-col">@Model.AddressesIM[k].Country</div>
+                    <div class="col-md-2 themed-grid-col">
+                        <button class="btn btn-success btn-sm m-1" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseEditAddress_@Model.AddressesIM[k].AddressId"
+                                data-seido-selected-item-id="@Model.AddressesIM[k].AddressId">
+                            Edit
+                        </button>
+                    </div>
+                </div>
+                <div class="collapse row mb-2 text-center" id="collapseEditAddress_@Model.AddressesIM[k].AddressId">
+                    <div class="form-floating col-md-4 themed-grid-col">
+                        <input type="text" class="form-control" asp-for="AddressesIM[k].editStreetAddress" />
+                        <label asp-for="AddressesIM[k].editStreetAddress">Street address</label>
+                    </div>
+                    <div class="form-floating col-md-2 themed-grid-col">
+                        <input type="text" class="form-control" asp-for="AddressesIM[k].editZipCode" />
+                        <label asp-for="AddressesIM[k].editZipCode">Zipcode</label>
+                    </div>
+                    <div class="form-floating col-md-2 themed-grid-col">
+                        <input type="text" class="form-control" asp-for="AddressesIM[k].editCity" />
+                        <label asp-for="AddressesIM[k].editCity">City</label>
+                    </div>
+                    <div class="form-floating col-md-2 themed-grid-col">
+                        <input type="text" class="form-control" asp-for="AddressesIM[k].editCountry" />
+                        <label asp-for="AddressesIM[k].editCountry">Country</label>
+                    </div>
+                    <div class="col-md-2 themed-grid-col">
+                        <button type="submit" asp-page-handler="Edit" class="btn btn-success btn-sm m-1">
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            }
+        </form>
+    </div>

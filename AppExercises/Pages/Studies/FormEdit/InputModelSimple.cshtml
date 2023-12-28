@@ -15,7 +15,9 @@
 
         <h2 class="pb-2 border-bottom">
             @Model.PageHeader
-            <button class="btn btn-primary-outline" type="submit" asp-page-handler="Save">
+             <button class="btn btn-primary-outline" type="button" data-bs-toggle="modal" data-bs-target="#saveModal"
+                        data-seido-modal-title="@Model.QuoteIM.QuoteId" data-seido-modal-body="About to save @Model.QuoteIM.QuoteId"
+                        data-seido-modal-cancel="Close" data-seido-modal-Ok="Save">
                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#save" /></svg>
             </button>
             @if (Model.QuoteIM.StatusIM != AppStudies.Pages.InputModelSimpleModel.enStatusIM.Inserted)
@@ -36,22 +38,52 @@
         }
         else
         {
-            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-                <div class="col-md-7 col-lg-10">
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="author" class="form-label">Author</label>
-                            <input type="text" class="form-control" asp-for="QuoteIM.Author" id="author" value="@Model.QuoteIM.Author">
-                        </div>
-                        <div class="col-sm-6">
-                        </div>
-                        <div class="col-sm-12">
-                            <label for="quote" class="form-label">Quote</label>
-                            <input type="text" class="form-control" asp-for="QuoteIM.Quote" id="quote" value="@Model.QuoteIM.Quote">
-                        </div>
+    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+        <div class="col-md-7 col-lg-10">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-control" asp-for="QuoteIM.Author" id="author" value="@Model.QuoteIM.Author">
+                </div>
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-12">
+                    <label for="quote" class="form-label">Quote</label>
+                    <input type="text" class="form-control" asp-for="QuoteIM.Quote" id="quote" value="@Model.QuoteIM.Quote">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-10">
+            <div class="row g-3">
+                <button class="w-100 btn btn-primary my-1" type="button" data-bs-toggle="modal" data-bs-target="#saveModal"
+                        data-seido-modal-title="@Model.QuoteIM.QuoteId" data-seido-modal-body="About to save @Model.QuoteIM.QuoteId"
+                        data-seido-modal-cancel="Close" data-seido-modal-Ok="Save">
+                    Save via Modal
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Save -->
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="softModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="softModalLabel">Confirm deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hello from modal
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" asp-page-handler="Save" class="btn btn-primary btn-danger">Ok</button>
                     </div>
                 </div>
             </div>
+        </div>
+
+
+    </div>
 
         }
     </form>
